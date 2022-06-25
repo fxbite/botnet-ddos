@@ -16,7 +16,7 @@ const route = (app: Application) => {
         })
     })
 
-    app.use('/', (req: Request, res: Response, next: NextFunction) => {
+    app.use('*', (req: Request, res: Response, next: NextFunction) => {
         res.status(404).json('No Service Found')
     })
 
