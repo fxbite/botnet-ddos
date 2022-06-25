@@ -1,13 +1,15 @@
-import {Browser, chromium} from 'playwright'
-import {v4 as uuidv4} from 'uuid' 
+import {Browser} from 'puppeteer' 
+import {v4 as uuidv4} from 'uuid'
 
 class Botnet {
 
-    async createBotnet(browser: Browser, websiteTarget: string, path: string) {
-        const context = await browser.newContext();
-        const page = await context.newPage();
-        await page.goto(websiteTarget);
-        await page.screenshot({path: `${path}/${uuidv4()}.png`})
+    async createBotnet(browser: Browser, websiteTarget: string, time: number) {
+        const page = await browser.newPage();
+        await page.setDefaultNavigationTimeout(300 * 1000)
+        await page.goto(websiteTarget, {waitUntil: 'load', timeout: 0});
+        await page.setCacheEnabled(false)
+        await page.reload({timeout: time * 1000})
+        // await page.screenshot({path: `Test/${uuidv4()}.png`});
     }
 }
 

